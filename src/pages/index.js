@@ -6,7 +6,7 @@ import {
   SECONDARY_TEXT,
   NICER_BLUE
 } from "../components/constants"
-import { Header } from "../components"
+import { Header, Wrapper } from "../components"
 import Logo from "../img/logo.svg"
 
 export default class IndexPage extends React.Component {
@@ -20,11 +20,16 @@ export default class IndexPage extends React.Component {
           background-color: ${NICER_BLUE};
           color: ${SECONDARY_TEXT};
         `}>
-        <div className="container">
-          <div className="content">
+        <div>
+          <Wrapper>
             <Header>
               <img src={Logo} alt="Nicer Logo" style={{ width: "140px" }} />
-              <h2>We build and launch brands, websites, and apps.</h2>
+              <h2
+                className={css`
+                  width: 650px;
+                `}>
+                We build and launch brands, websites, and apps.
+              </h2>
               <p
                 className={css`
                   width: 650px;
@@ -35,31 +40,26 @@ export default class IndexPage extends React.Component {
                 see.
               </p>
             </Header>
-          </div>
-          {posts
-            .filter(post => post.node.frontmatter.templateKey === "blog-post")
-            .map(({ node: post }) => (
-              <div
-                className="content"
-                style={{ border: "1px solid #eaecee", padding: "2em 4em" }}
-                key={post.id}>
-                <p>
-                  <Link className="has-text-primary" to={post.fields.slug}>
-                    {post.frontmatter.title}
-                  </Link>
-                  <span> &bull; </span>
-                  <small>{post.frontmatter.date}</small>
-                </p>
-                <p>
-                  {post.excerpt}
-                  <br />
-                  <br />
-                  <Link className="button is-small" to={post.fields.slug}>
-                    Keep Reading →
-                  </Link>
-                </p>
-              </div>
-            ))}
+          </Wrapper>
+          <Wrapper>
+            {posts
+              .filter(post => post.node.frontmatter.templateKey === "blog-post")
+              .map(({ node: post }) => (
+                <Link to={post.fields.slug}>
+                  <div
+                    style={{ border: "1px solid #eaecee", padding: "2em 4em" }}
+                    key={post.id}>
+                    <h3
+                      className={css`
+                        color: ${SECONDARY_TEXT};
+                      `}>
+                      {post.frontmatter.title}
+                    </h3>
+                    <p>{post.excerpt}</p>
+                  </div>
+                </Link>
+              ))}
+          </Wrapper>
         </div>
       </section>
     )
