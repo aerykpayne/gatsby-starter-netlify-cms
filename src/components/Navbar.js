@@ -1,38 +1,62 @@
-import React from 'react'
-import Link from 'gatsby-link'
+import React from "react"
+import Link from "gatsby-link"
+import { css } from "emotion"
 
-import github from '../img/github-icon.svg'
-import logo from '../img/logo.svg'
+import mLogo from "../img/minimal-logo.svg"
+import {
+  NICER_BLUE,
+  SECONDARY_TEXT,
+  MAX_WIDTH,
+  TERTIARY_TEXT
+} from "./constants"
 
+const NavLinks = css`
+  color: ${SECONDARY_TEXT};
+  font-family: Calibre, Roboto, sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  transition: all 200ms ease;
+  &:hover {
+    color: ${TERTIARY_TEXT};
+  }
+`
 const Navbar = () => (
-  <nav className="navbar is-transparent">
-    <div className="container">
-      <div className="navbar-brand">
-        <Link to="/" className="navbar-item">
-          <figure className="image">
-            <img src={logo} alt="Kaldi" style={{ width: '88px' }} />
+  <nav
+    className={css`
+      background-color: ${NICER_BLUE};
+      color: ${SECONDARY_TEXT};
+    `}>
+    <div
+      className={css`
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 auto;
+        padding: 20px 0px;
+        max-width: ${MAX_WIDTH};
+      `}>
+      <div>
+        <Link to="/" className={NavLinks}>
+          <figure>
+            <img src={mLogo} alt="Nicer Logo" style={{ width: "60px" }} />
           </figure>
         </Link>
       </div>
-      <div className="navbar-start">
-        <Link className="navbar-item" to="/about">
-          About
-        </Link>
-        <Link className="navbar-item" to="/products">
-          Products
-        </Link>
-      </div>
-      <div className="navbar-end">
-        <a
-          className="navbar-item"
-          href="https://github.com/AustinGreen/gatsby-netlify-cms-boilerplate"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <span className="icon">
-            <img src={github} alt="Github" />
-          </span>
-        </a>
+      <div>
+        <div
+          className={css`
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 200px;
+          `}>
+          <Link className={NavLinks} to="/about">
+            About Us
+          </Link>
+          <Link className={NavLinks} to="/products">
+            Work
+          </Link>
+        </div>
       </div>
     </div>
   </nav>

@@ -1,5 +1,13 @@
-import React from 'react'
-import Link from 'gatsby-link'
+import React from "react"
+import Link from "gatsby-link"
+import { css } from "emotion"
+import {
+  PRIMARY_TEXT,
+  SECONDARY_TEXT,
+  NICER_BLUE
+} from "../components/constants"
+import { Header } from "../components"
+import Logo from "../img/logo.svg"
 
 export default class IndexPage extends React.Component {
   render() {
@@ -7,19 +15,34 @@ export default class IndexPage extends React.Component {
     const { edges: posts } = data.allMarkdownRemark
 
     return (
-      <section className="section">
+      <section
+        className={css`
+          background-color: ${NICER_BLUE};
+          color: ${SECONDARY_TEXT};
+        `}>
         <div className="container">
           <div className="content">
-            <h1 className="has-text-weight-bold is-size-2">Latest Stories</h1>
+            <Header>
+              <img src={Logo} alt="Nicer Logo" style={{ width: "140px" }} />
+              <h2>We build and launch brands, websites, and apps.</h2>
+              <p
+                className={css`
+                  width: 650px;
+                `}>
+                Nicer is a product-centric studio that enables companies to
+                create, build and launch their next product. We’re also working
+                to create and build our own products that solve the problems we
+                see.
+              </p>
+            </Header>
           </div>
           {posts
-            .filter(post => post.node.frontmatter.templateKey === 'blog-post')
+            .filter(post => post.node.frontmatter.templateKey === "blog-post")
             .map(({ node: post }) => (
               <div
                 className="content"
-                style={{ border: '1px solid #eaecee', padding: '2em 4em' }}
-                key={post.id}
-              >
+                style={{ border: "1px solid #eaecee", padding: "2em 4em" }}
+                key={post.id}>
                 <p>
                   <Link className="has-text-primary" to={post.fields.slug}>
                     {post.frontmatter.title}
