@@ -33,6 +33,7 @@ export default class IndexPage extends React.Component {
               <p
                 className={css`
                   width: 650px;
+                  font-size: 22px;
                 `}>
                 Nicer is a product-centric studio that enables companies to
                 create, build and launch their next product. We’re also working
@@ -41,13 +42,28 @@ export default class IndexPage extends React.Component {
               </p>
             </Header>
           </Wrapper>
-          <Wrapper>
+          <Wrapper
+            className={css`
+              position: relative;
+              bottom: 650px;
+            `}>
             {posts
               .filter(post => post.node.frontmatter.templateKey === "blog-post")
               .map(({ node: post }) => (
                 <Link to={post.fields.slug}>
                   <div
-                    style={{ border: "1px solid #eaecee", padding: "2em 4em" }}
+                    className={css`
+                      background-color: ${NICER_BLUE};
+                      border-radius: 8px;
+                      box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+                      padding: 35px;
+                      margin: 35px 0px;
+                      transition: all 250ms ease;
+                      &:hover {
+                        transform: translateY(-3px);
+                        box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.25);
+                      }
+                    `}
                     key={post.id}>
                     <h3
                       className={css`
