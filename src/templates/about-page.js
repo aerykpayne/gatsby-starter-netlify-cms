@@ -1,5 +1,13 @@
-import React from 'react'
-import Content, { HTMLContent } from '../components/Content'
+import React from "react"
+import Content, { HTMLContent } from "../components/Content"
+import { css } from "emotion"
+import {
+  PRIMARY_TEXT,
+  SECONDARY_TEXT,
+  NICER_BLUE
+} from "../components/constants"
+import { Header, Wrapper } from "../components"
+import Logo from "../img/logo.svg"
 
 export const AboutPageTemplate = ({ title, content, contentComponent }) => {
   const PageContent = contentComponent || Content
