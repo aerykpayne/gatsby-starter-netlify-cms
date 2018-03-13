@@ -45,7 +45,7 @@ collections:
 
   - name: "case-study"
     label: "Case Study"
-    folder: "src/content/studio"
+    folder: "src/pages/work"
     create: true
     fields:
       - {label: "Key", name: "key", widget: "hidden", default: "case-study"}
