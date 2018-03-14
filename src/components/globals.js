@@ -59,4 +59,7 @@ injectGlobal`
     margin: 0;
     color: ${SECONDARY_TEXT};
   }
+  a {
+    text-decoration: none;
+  }
 `

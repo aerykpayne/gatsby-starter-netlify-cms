@@ -9,4 +9,4 @@ export const DESKTOP_BREAKPOINT = "992px"
 export const TABLET_BREAKPOINT = "768px"
 export const PHONE_BREAKPOINT = "480px"
 
-export const MAX_WIDTH = "1000px"
+export const MAX_WIDTH = "1100px"

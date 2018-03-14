@@ -9,17 +9,8 @@ export default function Header({ className, children, ...rest }) {
   const headerClass = css`
     position: relative;
     width: 100%;
-    height: 1000px;
+    height: 100%;
     color: white;
-    background-size: 50%;
-    background-repeat: no-repeat;
-    background-position: 95% -10%;
-    background-image: url(${rocket});
-    background-color: ${NICER_BLUE};
-    & + * {
-      padding-top: 0 !important;
-      margin-top: -150px !important;
-    }
     h2 {
       color: ${SECONDARY_TEXT};
       font-size: 48px;
@@ -31,7 +22,7 @@ export default function Header({ className, children, ...rest }) {
   `
   return (
     <header {...rest} className={cx(headerClass, className)}>
-      <Wrapper>{children}</Wrapper>
+      {children}
     </header>
   )
 }

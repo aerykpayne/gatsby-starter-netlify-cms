@@ -8,4 +8,5 @@ blurb: Connect with your website visitors through Slack.
 type: Slack App
 client: Internal Project
 ---
-Hello
+
+Hello World! Here's some copy for this case study.

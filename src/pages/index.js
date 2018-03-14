@@ -6,13 +6,23 @@ import {
   SECONDARY_TEXT,
   NICER_BLUE
 } from "../components/constants"
-import { Header, Wrapper } from "../components"
+import {
+  Header,
+  Wrapper,
+  FullScreenWrapper,
+  CaseStudyCards,
+  WhatWeDo,
+  Contact
+} from "../components"
 import Logo from "../img/logo.svg"
+import greenville from "../img/greenville.png"
+import rocket from "../img/rocket.png"
 
 export default class IndexPage extends React.Component {
   render() {
-    const { data } = this.props
-    const { edges: posts } = data.allMarkdownRemark
+    const { featuredCaseStudies } = this.props.data
+    // const { data } = this.props
+    // const { edges: posts } = data.allMarkdownRemark
 
     return (
       <section
@@ -21,6 +31,19 @@ export default class IndexPage extends React.Component {
           color: ${SECONDARY_TEXT};
         `}>
         <div>
+          <FullScreenWrapper
+            className={css`
+              position: absolute;
+              width: 100%;
+              height: 1000px;
+              color: white;
+              background-size: 50%;
+              background-repeat: no-repeat;
+              background-position: 95% -10%;
+              background-image: url(${rocket});
+              background-color: ${NICER_BLUE};
+            `}
+          />
           <Wrapper>
             <Header>
               <img src={Logo} alt="Nicer Logo" style={{ width: "140px" }} />
@@ -34,6 +57,7 @@ export default class IndexPage extends React.Component {
                 className={css`
                   width: 650px;
                   font-size: 22px;
+                  line-height: 32px;
                 `}>
                 Nicer is a product-centric studio that enables companies to
                 create, build and launch their next product. We’re also working
@@ -42,61 +66,54 @@ export default class IndexPage extends React.Component {
               </p>
             </Header>
           </Wrapper>
+
           <Wrapper
             className={css`
               position: relative;
-              bottom: 650px;
             `}>
-            {posts
-              .filter(post => post.node.frontmatter.templateKey === "blog-post")
-              .map(({ node: post }) => (
-                <Link to={post.fields.slug}>
-                  <div
-                    className={css`
-                      background-color: ${NICER_BLUE};
-                      border-radius: 8px;
-                      box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
-                      padding: 35px;
-                      margin: 35px 0px;
-                      transition: all 250ms ease;
-                      &:hover {
-                        transform: translateY(-3px);
-                        box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.25);
-                      }
-                    `}
-                    key={post.id}>
-                    <h3
-                      className={css`
-                        color: ${SECONDARY_TEXT};
-                      `}>
-                      {post.frontmatter.title}
-                    </h3>
-                    <p>{post.excerpt}</p>
-                  </div>
-                </Link>
-              ))}
+            <CaseStudyCards
+              cases={featuredCaseStudies.edges.map(edge => edge.node)}
+            />
           </Wrapper>
+          <Wrapper
+            className={css`
+              position: relative;
+            `}>
+            <WhatWeDo />
+          </Wrapper>
+          <FullScreenWrapper
+            className={css`
+              position: relative;
+              width: 100vw;
+              background-size: cover;
+              background-repeat: no-repeat;
+              background-position: center;
+              background-image: url(${greenville});
+              background-color: ${NICER_BLUE};
+            `}>
+            <Wrapper>
+              <Contact
+                ContactCTA="Interesting in Working with us?"
+                ContactCopy="We are always looking for things to build—things that we can be proud of. Currently accepting projects starting at $10k."
+              />
+            </Wrapper>
+          </FullScreenWrapper>
         </div>
       </section>
     )
   }
 }
 
-export const pageQuery = graphql`
-  query IndexQuery {
-    allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }) {
+export const query = graphql`
+  query IndexPageQuery {
+    featuredCaseStudies: allMarkdownRemark(
+      filter: { frontmatter: { key: { eq: "case-study" } } }
+      sort: { fields: [frontmatter___date], order: DESC }
+      limit: 3
+    ) {
       edges {
         node {
-          excerpt(pruneLength: 400)
-          id
-          fields {
-            slug
-          }
-          frontmatter {
-            title
-            templateKey
-            date(formatString: "MMMM DD, YYYY")
-          }
+          ...CaseStudyPreview
         }
       }
     }

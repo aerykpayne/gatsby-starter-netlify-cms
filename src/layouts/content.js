@@ -2,12 +2,11 @@ import React from "react"
 import PropTypes from "prop-types"
 import Helmet from "react-helmet"
 
-import Navbar from "../components/Navbar"
-import Footer from "../components/Footer"
+import { Navbar, Footer } from "../components"
 
 const TemplateWrapper = ({ children }) => (
   <div>
-    <Helmet title="Nicer Studio" />
+    <Helmet title="Openfields" />
     <Navbar />
     <div>{children()}</div>
     <Footer />

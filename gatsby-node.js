@@ -1,20 +1,23 @@
-const path = require('path')
-const { createFilePath } = require('gatsby-source-filesystem')
+const path = require("path")
+const chunk = require("lodash/chunk")
 
 exports.createPages = ({ boundActionCreators, graphql }) => {
   const { createPage } = boundActionCreators
+  // scroll to bottom
+  const createSlugPages = bindSlugPagesCreator(createPage)
+  const createPaginationPages = bindPaginationPagesCreator(createPage)
 
   return graphql(`
     {
-      allMarkdownRemark(limit: 1000) {
+      allMarkdownRemark(
+        sort: { order: DESC, fields: [frontmatter___date] }
+        limit: 1000
+      ) {
         edges {
           node {
-            id
-            fields {
-              slug
-            }
             frontmatter {
-              templateKey
+              key
+              slug
             }
           }
         }
@@ -26,31 +29,67 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
       return Promise.reject(result.errors)
     }
 
-    result.data.allMarkdownRemark.edges.forEach(edge => {
-      const id = edge.node.id
-      createPage({
-        path: edge.node.fields.slug,
-        component: path.resolve(
-          `src/templates/${String(edge.node.frontmatter.templateKey)}.js`
-        ),
-        // additional data can be passed via context
-        context: {
-          id,
-        },
-      })
+    const { edges } = result.data.allMarkdownRemark
+    const filterByKey = key => edges.filter(e => e.node.frontmatter.key === key)
+
+    const caseStudyEdges = filterByKey("case-study")
+
+    // work(/:page)
+    createPaginationPages({
+      edges: caseStudyEdges,
+      rootPath: "/work",
+      component: path.resolve("src/templates/case-study-collection.js")
+    })
+    // work/:slug
+    createSlugPages({
+      edges: caseStudyEdges,
+      layout: "content",
+      rootPath: "/work",
+      component: path.resolve(`src/templates/case-study-post.js`)
     })
   })
 }
 
-exports.onCreateNode = ({ node, boundActionCreators, getNode }) => {
-  const { createNodeField } = boundActionCreators
+// helper functions
 
-  if (node.internal.type === `MarkdownRemark`) {
-    const value = createFilePath({ node, getNode })
-    createNodeField({
-      name: `slug`,
-      node,
-      value,
+const bindSlugPagesCreator = createPage => ({
+  edges,
+  layout,
+  component,
+  rootPath
+}) => {
+  edges.forEach(edge => {
+    createPage({
+      path: path.join(rootPath, edge.node.frontmatter.slug),
+      layout: layout,
+      component: component,
+      context: {
+        slug: edge.node.frontmatter.slug
+      }
     })
-  }
+  })
+}
+
+const bindPaginationPagesCreator = createPage => ({
+  edges,
+  layout,
+  component,
+  limit = 2,
+  rootPath
+}) => {
+  chunk(edges, limit).forEach((chunk, index, chunks) => {
+    createPage({
+      path: path.join(rootPath, `${index ? index : ""}`),
+      layout: layout,
+      component: component,
+      context: {
+        index: index,
+        limit: limit,
+        skip: index * limit,
+        toPrev: index > 0 ? path.join(rootPath, `${index - 1 || ""}`) : null,
+        toNext:
+          index < chunks.length - 1 ? path.join(rootPath, `${index + 1}`) : null
+      }
+    })
+  })
 }

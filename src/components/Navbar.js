@@ -37,7 +37,10 @@ const Navbar = () => (
       `}>
       <div>
         <Link to="/" className={NavLinks}>
-          <figure>
+          <figure
+            className={css`
+              margin-left: 25px;
+            `}>
             <img src={mLogo} alt="Nicer Logo" style={{ width: "60px" }} />
           </figure>
         </Link>
@@ -49,6 +52,7 @@ const Navbar = () => (
             align-items: center;
             justify-content: space-between;
             width: 200px;
+            margin-right: 25px;
           `}>
           <Link className={NavLinks} to="/about">
             About Us
