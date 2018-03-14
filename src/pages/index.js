@@ -39,7 +39,7 @@ export default class IndexPage extends React.Component {
               color: white;
               background-size: 50%;
               background-repeat: no-repeat;
-              background-position: 95% -10%;
+              background-position: 80% -10%;
               background-image: url(${rocket});
               background-color: ${NICER_BLUE};
             `}
