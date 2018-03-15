@@ -89,6 +89,14 @@ export default function WhatWeDo({ className }) {
             iOS and Android apps as well.
           </p>
         </div>
+        <div className={service}>
+          <h4>Consulation</h4>
+          <p>
+            We take our combined experiece in digital product design and
+            development, and we then together to solve the problems facing your
+            company.
+          </p>
+        </div>
       </div>
     </div>
   )

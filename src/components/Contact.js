@@ -12,6 +12,7 @@ const Contact = props => (
       flex-direction: column;
       justify-content: space-between;
       margin: 0 auto;
+      margin-bottom: 100px;
       width: 100%;
       h2 {
         font-weight: 600;

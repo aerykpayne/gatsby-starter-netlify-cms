@@ -1,7 +1,9 @@
 import React from "react"
 import Link from "gatsby-link"
 import PropTypes from "prop-types"
-import { CaseStudyCards, Wrapper } from "../components"
+import { cx, css } from "emotion"
+import { CaseStudyCards, Wrapper, ProjectCards } from "../components"
+import { NICER_BLUE } from "../components/constants"
 
 export default class CasePageTemplate extends React.Component {
   static propTypes = {
@@ -10,8 +12,12 @@ export default class CasePageTemplate extends React.Component {
   }
 
   render() {
+    const { projects } = this.props.data
     return (
-      <div>
+      <div
+        className={css`
+          background-color: ${NICER_BLUE};
+        `}>
         <Wrapper>
           <CaseStudyCards
             cases={this.props.data.caseStudyPosts.edges.map(edge => edge.node)}
@@ -26,6 +32,9 @@ export default class CasePageTemplate extends React.Component {
               Next Page
             </Link>
           )}
+        </Wrapper>
+        <Wrapper>
+          <ProjectCards projects={projects.edges.map(edge => edge.node)} />
         </Wrapper>
       </div>
     )
@@ -43,6 +52,17 @@ export const query = graphql`
       edges {
         node {
           ...CaseStudyPreview
+        }
+      }
+    }
+    projects: allMarkdownRemark(
+      filter: { frontmatter: { key: { eq: "project" } } }
+      sort: { fields: [frontmatter___date], order: DESC }
+      limit: 4
+    ) {
+      edges {
+        node {
+          ...ProjectPreview
         }
       }
     }

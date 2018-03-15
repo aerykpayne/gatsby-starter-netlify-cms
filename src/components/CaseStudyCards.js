@@ -11,7 +11,6 @@ export function CaseStudyCard({ slug, client, title, blurb, image, type }) {
         className={css`
           display: flex;
           background-color: ${NICER_BLUE};
-
           border-radius: 8px;
           box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
           margin: 0px 0px 70px 0px;

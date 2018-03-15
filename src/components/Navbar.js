@@ -5,19 +5,57 @@ import { css } from "emotion"
 import mLogo from "../img/minimal-logo.svg"
 import {
   NICER_BLUE,
+  NICER_PINK,
   SECONDARY_TEXT,
   MAX_WIDTH,
   TERTIARY_TEXT
 } from "./constants"
 
 const NavLinks = css`
-  color: ${SECONDARY_TEXT};
-  font-family: Calibre, Roboto, sans-serif;
-  font-weight: 600;
-  font-size: 24px;
-  transition: all 200ms ease;
-  &:hover {
-    color: ${TERTIARY_TEXT};
+  position: relative;
+  margin-bottom: 10px;
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    top: 8px;
+    bottom: 13px;
+    height: auto;
+    border-radius: 2px;
+    background: ${NICER_PINK};
+    opacity: 1;
+  }
+
+  &::before {
+    left: -10px;
+  }
+
+  &::after {
+    right: -10px;
+    background: ${NICER_PINK};
+    transition: width 500ms cubic-bezier(0.8, 0.1, 0.1, 1);
+  }
+
+  &:hover::before {
+    border-radius: 2px;
+    background: ${NICER_PINK};
+    width: 120%;
+    transition: width 500ms cubic-bezier(0.8, 0.1, 0.1, 1);
+  }
+
+  &:hover::after {
+    right: -6px;
+    background: transparent;
+    width: 120%;
+    transition: 0s;
+  }
+  span {
+    position: relative;
+    z-index: 3;
+    font-size: 24px;
+    font-weight: 600;
+    color: white;
   }
 `
 const Navbar = () => (
@@ -55,10 +93,10 @@ const Navbar = () => (
             margin-right: 25px;
           `}>
           <Link className={NavLinks} to="/about">
-            About Us
+            <span>About Us</span>
           </Link>
           <Link className={NavLinks} to="/work">
-            Work
+            <span>Work</span>
           </Link>
         </div>
       </div>
