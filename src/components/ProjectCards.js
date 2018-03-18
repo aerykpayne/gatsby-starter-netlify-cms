@@ -101,16 +101,14 @@ export default function ProjectCards({ projects = [] }) {
     <ul
       className={css`
         padding: 0;
-        margin: -10px;
         list-style: none;
         display: flex;
         flex-wrap: wrap;
         align-items: stretch;
-        justify-content: flex-start;
+        justify-content: space-between;
         li {
           min-width: 475px;
-          width: 33.3333%;
-          padding: 10px;
+          width: 48%;
           display: flex;
           align-items: stretch;
           @media (max-width: 728px) {
