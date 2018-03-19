@@ -5,9 +5,10 @@ import Wrapper from "./Wrapper"
 import { NICER_BLUE, MAX_WIDTH } from "./constants"
 
 import logo from "../img/logo.svg"
-import FACEBOOK_ICON from "../img/facebook-icon-o.svg"
+import DRIBBBLE_ICON from "../img/dribbble-icon-o"
 import TWITTER_ICON from "../img/twitter-icon-o.svg"
 import MAIL_ICON from "../img/mail-icon-o.svg"
+import MEDIUM_ICON from "../img/medium-icon-o.svg"
 
 export default function Footer() {
   return (
@@ -63,18 +64,18 @@ export default function Footer() {
               }
             `}>
             <li>
-              <a href="https://twitter.com/opnflds" target="_blank">
+              <a href="https://dribbble.com/nicerstudio" target="_blank">
+                <img src={DRIBBBLE_ICON} />
+              </a>
+            </li>
+            <li>
+              <a href="https://stories.nicer.io/" target="_blank">
+                <img src={MEDIUM_ICON} />
+              </a>
+            </li>
+            <li>
+              <a href="https://twitter.com/nicerstudio" target="_blank">
                 <img src={TWITTER_ICON} />
-              </a>
-            </li>
-            <li>
-              <a href="" target="_blank">
-                <img src={FACEBOOK_ICON} />
-              </a>
-            </li>
-            <li>
-              <a href="mailto:grady@openfields.com">
-                <img src={MAIL_ICON} />
               </a>
             </li>
           </ul>

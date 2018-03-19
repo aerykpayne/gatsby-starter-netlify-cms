@@ -2,7 +2,12 @@ import React from "react"
 import path from "path"
 import { css } from "emotion"
 import Link from "gatsby-link"
-import { NICER_BLUE, TERTIARY_TEXT } from "./constants"
+import {
+  NICER_BLUE,
+  TERTIARY_TEXT,
+  TABLET_BREAKPOINT,
+  MOBILE_BREAKPOINT
+} from "./constants"
 
 export function CaseStudyCard({ slug, client, title, blurb, image, type }) {
   return (
@@ -31,6 +36,10 @@ export function CaseStudyCard({ slug, client, title, blurb, image, type }) {
               font-weight: 600;
               font-size: 18px;
               color: ${TERTIARY_TEXT};
+
+              @media (max-width: ${TABLET_BREAKPOINT}) {
+                margin: 0px 0px 40px 0px;
+              }
             `}>
             {title}
           </h5>
@@ -40,8 +49,12 @@ export function CaseStudyCard({ slug, client, title, blurb, image, type }) {
               font-size: 36px;
               font-weight: 600;
               line-height: 40px;
-              width: 400px;
+              max-width: 400px;
               color: white;
+
+              @media (max-width: ${TABLET_BREAKPOINT}) {
+                margin: 0px 0px 40px 0px;
+              }
             `}>
             {blurb}
           </h3>
@@ -74,6 +87,10 @@ export function CaseStudyCard({ slug, client, title, blurb, image, type }) {
             transition: all 400ms ease;
             &:hover {
               background-position: 80% 25%;
+            }
+
+            @media (max-width: ${TABLET_BREAKPOINT}) {
+              background-position: 80% 40%;
             }
           `}
         />

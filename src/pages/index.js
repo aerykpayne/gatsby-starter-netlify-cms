@@ -4,7 +4,10 @@ import { css } from "emotion"
 import {
   PRIMARY_TEXT,
   SECONDARY_TEXT,
-  NICER_BLUE
+  NICER_BLUE,
+  DESKTOP_BREAKPOINT,
+  TABLET_BREAKPOINT,
+  MOBILE_BREAKPOINT
 } from "../components/constants"
 import {
   Header,
@@ -21,8 +24,6 @@ import rocket from "../img/rocket.png"
 export default class IndexPage extends React.Component {
   render() {
     const { featuredCaseStudies } = this.props.data
-    // const { data } = this.props
-    // const { edges: posts } = data.allMarkdownRemark
 
     return (
       <section
@@ -42,6 +43,13 @@ export default class IndexPage extends React.Component {
               background-position: 80% -10%;
               background-image: url(${rocket});
               background-color: ${NICER_BLUE};
+
+              @media (max-width: ${DESKTOP_BREAKPOINT}) {
+                background-position: 80% 30%;
+              }
+              @media (max-width: ${TABLET_BREAKPOINT}) {
+                background-position: 80% 30%;
+              }
             `}
           />
           <Wrapper>

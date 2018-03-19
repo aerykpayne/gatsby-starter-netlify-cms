@@ -46,7 +46,7 @@ const Contact = props => (
       className={css`
         margin-top: 80px;
       `}>
-      Sound like the right fit? <a href="#">Get in Touch</a>
+      Sound like the right fit? <a href="mailto:hello@nicer.io">Get in Touch</a>
     </p>
   </div>
 )
