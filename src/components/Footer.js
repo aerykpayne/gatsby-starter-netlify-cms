@@ -2,10 +2,10 @@ import React from "react"
 import { css } from "emotion"
 import Link from "gatsby-link"
 import Wrapper from "./Wrapper"
-import { NICER_BLUE, MAX_WIDTH } from "./constants"
+import { NICER_BLUE, NICER_PINK, MAX_WIDTH } from "./constants"
 
 import logo from "../img/logo.svg"
-import DRIBBBLE_ICON from "../img/dribbble-icon-o"
+import DRIBBBLE_ICON from "../img/dribbble-icon-o.svg"
 import TWITTER_ICON from "../img/twitter-icon-o.svg"
 import MAIL_ICON from "../img/mail-icon-o.svg"
 import MEDIUM_ICON from "../img/medium-icon-o.svg"
@@ -61,6 +61,13 @@ export default function Footer() {
               img {
                 width: 32px;
                 height: 32px;
+                border-radius: 35px;
+                box-shadow: 0px 0px 0px ${NICER_PINK};
+                transition: all 200ms ease;
+              }
+              img:hover {
+                border-radius: 35px;
+                box-shadow: 3px 4px 0px ${NICER_PINK};
               }
             `}>
             <li>
