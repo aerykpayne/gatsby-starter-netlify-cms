@@ -11,7 +11,7 @@ import {
 
 export function CaseStudyCard({ slug, client, title, blurb, image, type }) {
   return (
-    <Link to={path.join("/work", slug)} className={css``}>
+    <Link to={path.join("/study", slug)} className={css``}>
       <div
         className={css`
           display: flex;
